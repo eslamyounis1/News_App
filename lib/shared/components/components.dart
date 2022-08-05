@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 
 Widget buildArticleItem(article) => Padding(
@@ -62,3 +63,16 @@ Widget myDivider() => Padding(
         color: Colors.grey[300],
       ),
     );
+
+Widget articleBuilder(list)=> ConditionalBuilder(
+  condition: list.isNotEmpty,
+  builder: (context) => ListView.separated(
+    physics: const BouncingScrollPhysics(),
+    itemBuilder: (context, index) =>
+        buildArticleItem(list[index]),
+    separatorBuilder: (context, index) => myDivider(),
+    itemCount:list.length,
+  ),
+  fallback: (context) =>
+  const Center(child: CircularProgressIndicator()),
+);
