@@ -23,7 +23,7 @@ class BusinessScreen extends StatelessWidget {
             itemBuilder: (context, index) =>
                 buildArticleItem(businessItemList[index]),
             separatorBuilder: (context, index) => myDivider(),
-            itemCount:50,
+            itemCount:businessItemList.length,
           ),
           fallback: (context) =>
               const Center(child: CircularProgressIndicator()),
