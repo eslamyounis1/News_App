@@ -6,6 +6,7 @@ import 'package:news_app/layout/cubit/states.dart';
 import 'package:news_app/modules/science/science_screen.dart';
 import 'package:news_app/modules/sports/sports_screen.dart';
 
+import '../../.env.dart';
 import '../../modules/business/business_screen.dart';
 import '../../modules/settings/settings_screen.dart';
 import '../../shared/network/remote/dio_helper.dart';
@@ -70,7 +71,7 @@ class NewsCubit extends Cubit<NewsStates> {
         query: {
           'country': 'eg',
           'category': 'business',
-          'apiKey': '65f7f556ec76449fa7dc7c0069f040ca',
+          'apiKey': apiKey,
         },
       ).then((value) {
         // print(value.data['articles'][0]['title']);
@@ -98,7 +99,7 @@ class NewsCubit extends Cubit<NewsStates> {
         query: {
           'country': 'eg',
           'category': 'science',
-          'apiKey': '65f7f556ec76449fa7dc7c0069f040ca',
+          'apiKey': apiKey,
         },
       ).then((value) {
         // print(value.data['articles'][0]['title']);
@@ -126,7 +127,7 @@ class NewsCubit extends Cubit<NewsStates> {
         query: {
           'country': 'eg',
           'category': 'sports',
-          'apiKey': '65f7f556ec76449fa7dc7c0069f040ca',
+          'apiKey': apiKey,
         },
       ).then((value) {
         // print(value.data['articles'][0]['title']);
