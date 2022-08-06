@@ -32,5 +32,5 @@ class NewsGetSportsErrorState extends NewsStates{
 
 class ChangeDarkModeState extends NewsStates{}
 
-class LightModeState extends NewsStates{}
+
 

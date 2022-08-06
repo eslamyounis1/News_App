@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NewsCubit(),
+      create: (BuildContext context) => NewsCubit()..getBusiness(),
       child: BlocConsumer<NewsCubit,NewsStates>(
         listener: (context,state)=>{},
         builder: (context,state) {
@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
                 iconTheme: IconThemeData(
                   color: Colors.black,
                 ),
+                titleSpacing: 20.0,
               ),
               floatingActionButtonTheme: const FloatingActionButtonThemeData(
                 backgroundColor: Colors.deepOrange,
@@ -87,6 +88,7 @@ class MyApp extends StatelessWidget {
                 iconTheme: const IconThemeData(
                   color: Colors.white,
                 ),
+                titleSpacing: 20.0,
               ),
               floatingActionButtonTheme: const FloatingActionButtonThemeData(
                 backgroundColor: Colors.deepOrange,

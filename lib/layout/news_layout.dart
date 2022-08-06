@@ -12,50 +12,42 @@ class NewsLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => NewsCubit()..getBusiness(),
-      child: BlocConsumer<NewsCubit, NewsStates>(
-        listener: (BuildContext context, NewsStates state) {},
-        builder: (BuildContext context, NewsStates state) {
-          var cubit = NewsCubit.get(context);
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text(
-                'News App',
+    return BlocConsumer<NewsCubit, NewsStates>(
+      listener: (BuildContext context, NewsStates state) {},
+      builder: (BuildContext context, NewsStates state) {
+        var cubit = NewsCubit.get(context);
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text(
+              'News App',
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.search,
+                ),
               ),
-              actions: [
-                IconButton(
-                    onPressed: (){},
-                    icon: const Icon(
-                      Icons.search,
-                    ),
+              IconButton(
+                onPressed: () {
+                  cubit.changeToDarkMode();
+                },
+                icon: const Icon(
+                  Icons.dark_mode,
                 ),
-                IconButton(
-                    onPressed: (){
-                      if(state is LightModeState){
-                        cubit.isDark = false;
-                      }
-                      else if(state is ChangeDarkModeState){
-                        cubit.isDark = true;
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.dark_mode,
-                    ),
-                ),
-              ],
-            ),
-            body: cubit.screens[cubit.currentIndex],
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: cubit.currentIndex,
-              onTap: (index) {
-                cubit.changeIndex(index);
-              },
-              items: cubit.bottomItems,
-            ),
-          );
-        },
-      ),
+              ),
+            ],
+          ),
+          body: cubit.screens[cubit.currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: cubit.currentIndex,
+            onTap: (index) {
+              cubit.changeIndex(index);
+            },
+            items: cubit.bottomItems,
+          ),
+        );
+      },
     );
   }
 }
