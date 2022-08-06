@@ -1,19 +1,26 @@
+
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 
-Widget buildArticleItem(article) => Padding(
+Widget buildArticleItem(article,context) => Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
         children: [
-          Container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              image:  DecorationImage(
-                image: NetworkImage(
-                    '${article['urlToImage']}'),
-                fit: BoxFit.cover,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    article['urlToImage'].toString(),
+
+                  ),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -26,16 +33,13 @@ Widget buildArticleItem(article) => Padding(
               child: Column(
                 // mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children:  [
+                children: [
                   Expanded(
                     child: Text(
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       '${article['title']}',
-                      style: const TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
                   // SizedBox(
@@ -64,15 +68,13 @@ Widget myDivider() => Padding(
       ),
     );
 
-Widget articleBuilder(list)=> ConditionalBuilder(
-  condition: list.isNotEmpty,
-  builder: (context) => ListView.separated(
-    physics: const BouncingScrollPhysics(),
-    itemBuilder: (context, index) =>
-        buildArticleItem(list[index]),
-    separatorBuilder: (context, index) => myDivider(),
-    itemCount:list.length,
-  ),
-  fallback: (context) =>
-  const Center(child: CircularProgressIndicator()),
-);
+Widget articleBuilder(list) => ConditionalBuilder(
+      condition: list.isNotEmpty,
+      builder: (context) => ListView.separated(
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (context, index) => buildArticleItem(list[index],context),
+        separatorBuilder: (context, index) => myDivider(),
+        itemCount: list.length,
+      ),
+      fallback: (context) => const Center(child: CircularProgressIndicator()),
+    );

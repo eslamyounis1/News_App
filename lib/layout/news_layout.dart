@@ -29,7 +29,20 @@ class NewsLayout extends StatelessWidget {
                     icon: const Icon(
                       Icons.search,
                     ),
-                )
+                ),
+                IconButton(
+                    onPressed: (){
+                      if(state is LightModeState){
+                        cubit.isDark = false;
+                      }
+                      else if(state is ChangeDarkModeState){
+                        cubit.isDark = true;
+                      }
+                    },
+                    icon: const Icon(
+                      Icons.dark_mode,
+                    ),
+                ),
               ],
             ),
             body: cubit.screens[cubit.currentIndex],

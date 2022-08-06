@@ -143,4 +143,18 @@ class NewsCubit extends Cubit<NewsStates> {
       emit(NewsGetSportsSuccessState());
     }
   }
+
+  ThemeMode mode = ThemeMode.light;
+  bool isDark = false;
+
+  void lightMode(){
+    isDark = isDark;
+    emit(LightModeState());
+  }
+
+  void changeToDarkMode(){
+    isDark = true;
+    emit(ChangeDarkModeState());
+  }
+
 }
