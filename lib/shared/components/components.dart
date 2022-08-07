@@ -1,56 +1,72 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/modules/web_view/web_view_screen.dart';
 
-Widget buildArticleItem(article, context) => Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10.0),
-            child: Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    article['urlToImage'].toString(),
+Widget buildArticleItem(article, context) => InkWell(
+      onTap: () {
+        navigateTo(
+            context: context,
+            destinationScreen: WebViewScreen(
+              url: article['url'].toString(),
+            ));
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Container(
+                width: 120,
+                height: 120,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      article['urlToImage'].toString(),
+                    ),
+                    fit: BoxFit.cover,
                   ),
-                  fit: BoxFit.cover,
                 ),
               ),
             ),
-          ),
-          const SizedBox(
-            width: 20.0,
-          ),
-          Expanded(
-            child: Container(
-              height: 120.0,
-              child: Column(
-                // mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Text(
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      '${article['title']}',
-                      style: Theme.of(context).textTheme.bodyText1,
+            const SizedBox(
+              width: 20.0,
+            ),
+            Expanded(
+              child: Container(
+                height: 120.0,
+                child: Column(
+                  // mainAxisSize: MainAxisSize.min,
+
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+                    Expanded(
+                      child: Text(
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        '${article['title']}',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
                     ),
-                  ),
-                  // SizedBox(
-                  //   height: 5.0,
-                  // ),
-                  Text(
-                    '${article['publishedAt']}',
-                    style: const TextStyle(color: Colors.grey),
-                  ),
-                ],
+
+                    // SizedBox(
+
+                    //   height: 5.0,
+
+                    // ),
+
+                    Text(
+                      '${article['publishedAt']}',
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
 
@@ -65,7 +81,7 @@ Widget myDivider() => Padding(
       ),
     );
 
-Widget articleBuilder(list) => ConditionalBuilder(
+Widget articleBuilder(list, {isSearch = false}) => ConditionalBuilder(
       condition: list.isNotEmpty,
       builder: (context) => ListView.separated(
         physics: const BouncingScrollPhysics(),
@@ -73,7 +89,9 @@ Widget articleBuilder(list) => ConditionalBuilder(
         separatorBuilder: (context, index) => myDivider(),
         itemCount: list.length,
       ),
-      fallback: (context) => const Center(child: CircularProgressIndicator()),
+      fallback: (context) => isSearch
+          ? Container()
+          : const Center(child: CircularProgressIndicator()),
     );
 
 Widget defaultFormField({

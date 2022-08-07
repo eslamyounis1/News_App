@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef1666c9-8fcc-42d4-87bb-3520cc824990" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/modules/search/search_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/modules/web_view/web_view_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/layout/cubit/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/layout/cubit/states.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/layout/news_layout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/layout/news_layout.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/search/search_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/search/search_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/shared/components/components.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared/components/components.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/shared/components/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared/components/constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/shared/network/local/cache_helper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shared/network/local/cache_helper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +46,7 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="flutter.view.tool.window.visible" value="true" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Flutter_Food_Delivery_App_UI" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />

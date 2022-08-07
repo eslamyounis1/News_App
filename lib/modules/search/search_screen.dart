@@ -11,9 +11,9 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var searchController = TextEditingController();
-    return BlocConsumer<NewsCubit,NewsStates>(
-      listener: (context,state){},
-      builder: (context,state){
+    return BlocConsumer<NewsCubit, NewsStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
         var cubit = NewsCubit.get(context);
         return Scaffold(
           appBar: AppBar(),
@@ -35,12 +35,13 @@ class SearchScreen extends StatelessWidget {
                       }
                       return null;
                     },
-                    onChange: (value){
+                    onChange: (value) {
                       cubit.getSearch(value);
-                    }
-                ),
+                    }),
               ),
-              Expanded(child: articleBuilder(cubit.search),),
+              Expanded(
+                child: articleBuilder(cubit.search,isSearch: true),
+              ),
             ],
           ),
         );
