@@ -18,7 +18,8 @@ class NewsCubit extends Cubit<NewsStates> {
   static NewsCubit get(context) => BlocProvider.of(context);
 
   int currentIndex = 0;
-  List<Widget> screens = [
+  PageController pController = PageController();
+  var screens = [
     const BusinessScreen(),
     const ScienceScreen(),
     const SportsScreen(),

@@ -26,7 +26,9 @@ class NewsLayout extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                 navigateTo(context: context, destinationScreen:const SearchScreen());
+                  navigateTo(
+                      context: context,
+                      destinationScreen: const SearchScreen());
                 },
                 icon: const Icon(
                   Icons.search,
@@ -42,11 +44,18 @@ class NewsLayout extends StatelessWidget {
               ),
             ],
           ),
-          body: cubit.screens[cubit.currentIndex],
+          body: PageView(
+            controller: cubit.pController,
+            children: cubit.screens,
+            onPageChanged: (index){
+              cubit.changeIndex(index);
+            },
+          ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: cubit.currentIndex,
             onTap: (index) {
               cubit.changeIndex(index);
+              cubit.pController.animateToPage(cubit.currentIndex, duration: const Duration(milliseconds: 500), curve: Curves.linear);
             },
             items: cubit.bottomItems,
           ),
