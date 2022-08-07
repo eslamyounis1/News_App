@@ -10,6 +10,7 @@ import 'package:news_app/shared/network/remote/dio_helper.dart';
 
 import 'bloc_observer.dart';
 import 'layout/news_layout.dart';
+import 'modules/search/search_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

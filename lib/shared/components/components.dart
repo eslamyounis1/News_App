@@ -1,9 +1,7 @@
-
-
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 
-Widget buildArticleItem(article,context) => Padding(
+Widget buildArticleItem(article, context) => Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
         children: [
@@ -17,7 +15,6 @@ Widget buildArticleItem(article,context) => Padding(
                 image: DecorationImage(
                   image: NetworkImage(
                     article['urlToImage'].toString(),
-
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -72,9 +69,51 @@ Widget articleBuilder(list) => ConditionalBuilder(
       condition: list.isNotEmpty,
       builder: (context) => ListView.separated(
         physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) => buildArticleItem(list[index],context),
+        itemBuilder: (context, index) => buildArticleItem(list[index], context),
         separatorBuilder: (context, index) => myDivider(),
         itemCount: list.length,
       ),
       fallback: (context) => const Center(child: CircularProgressIndicator()),
     );
+
+Widget defaultFormField({
+  required TextEditingController controller,
+  required String hintTxt,
+  required Function validator,
+  required Function onChange,
+  IconData? suffIcon,
+  IconData? preIcon,
+  TextInputType? type,
+
+}) {
+  return TextFormField(
+    controller: controller,
+    keyboardType: type,
+    decoration: InputDecoration(
+      suffix: Icon(
+        suffIcon,
+      ),
+      prefixIcon: Icon(
+        preIcon,
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      hintText: hintTxt,
+    ),
+    validator: (value){
+      return validator(value);
+    },
+    onChanged:(value){
+      onChange(value);
+    },
+
+  );
+}
+
+void navigateTo({
+  required BuildContext context,
+  required Widget destinationScreen,
+}){
+  Navigator.push(context, MaterialPageRoute(builder:(context)=>destinationScreen));
+}
