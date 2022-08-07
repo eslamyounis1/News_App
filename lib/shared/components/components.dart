@@ -84,7 +84,6 @@ Widget defaultFormField({
   IconData? suffIcon,
   IconData? preIcon,
   TextInputType? type,
-
 }) {
   return TextFormField(
     controller: controller,
@@ -101,19 +100,19 @@ Widget defaultFormField({
       ),
       hintText: hintTxt,
     ),
-    validator: (value){
+    validator: (value) {
       return validator(value);
     },
-    onChanged:(value){
+    onChanged: (value) {
       onChange(value);
     },
-
   );
 }
 
 void navigateTo({
   required BuildContext context,
   required Widget destinationScreen,
-}){
-  Navigator.push(context, MaterialPageRoute(builder:(context)=>destinationScreen));
+}) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => destinationScreen));
 }

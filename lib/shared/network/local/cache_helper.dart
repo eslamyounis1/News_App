@@ -14,9 +14,9 @@ class CashHelper {
     return await sharedPreferences.setBool(key, value);
   }
 
-  static bool? getBooleanData({
+  static bool getBooleanData({
     required String key,
   }) {
-    return sharedPreferences.getBool(key);
+    return sharedPreferences.getBool(key) ?? false;
   }
 }

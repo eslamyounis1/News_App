@@ -17,19 +17,19 @@ void main() async {
   DioHelper.init();
   await CashHelper.init();
 
-  bool? isDark = CashHelper.getBooleanData(key: 'isDark');
+  bool isDark = CashHelper.getBooleanData(key: 'isDark');
   BlocOverrides.runZoned(
     () {
-      runApp(MyApp(isDark!));
+      runApp(MyApp(isDark));
     },
     blocObserver: MyBlocObserver(),
   );
 }
 
-class MyApp extends StatelessWidget {
-  final bool isDark;
+class MyApp extends StatelessWidget{
+  late bool isDark;
 
-  const MyApp(this.isDark);
+   MyApp(this.isDark);
 
   @override
   Widget build(BuildContext context) {
