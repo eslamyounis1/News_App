@@ -55,7 +55,7 @@ class NewsLayout extends StatelessWidget {
             currentIndex: cubit.currentIndex,
             onTap: (index) {
               cubit.changeIndex(index);
-              cubit.pController.animateToPage(cubit.currentIndex, duration: const Duration(milliseconds: 500), curve: Curves.linear);
+              cubit.pController.animateToPage(cubit.currentIndex, duration: const Duration(milliseconds: 200), curve: Curves.easeOut);
             },
             items: cubit.bottomItems,
           ),
