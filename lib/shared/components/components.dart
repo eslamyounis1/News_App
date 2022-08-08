@@ -28,6 +28,7 @@ Widget buildArticleItem(article, context) => InkWell(
                     fit: BoxFit.cover,
                   ),
                 ),
+
               ),
             ),
             const SizedBox(

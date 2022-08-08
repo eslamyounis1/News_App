@@ -38,8 +38,8 @@ class NewsLayout extends StatelessWidget {
                 onPressed: () {
                   cubit.changeToDarkMode();
                 },
-                icon: const Icon(
-                  Icons.dark_mode,
+                icon:  Icon(
+                 cubit.isDark ? Icons.dark_mode : Icons.sunny,
                 ),
               ),
             ],
