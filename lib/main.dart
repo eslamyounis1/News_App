@@ -26,15 +26,17 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
   late bool isDark;
 
-   MyApp(this.isDark);
+  MyApp(this.isDark);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => NewsCubit()..getBusiness()..changeToDarkMode(fromShared: isDark),
+      create: (BuildContext context) => NewsCubit()
+        ..getBusiness()
+        ..changeToDarkMode(fromShared: isDark),
       child: BlocConsumer<NewsCubit, NewsStates>(
           listener: (context, state) => {},
           builder: (context, state) {
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget{
             return MaterialApp(
               theme: ThemeData(
                 primarySwatch: Colors.deepOrange,
+                primaryColor: Colors.white,
                 scaffoldBackgroundColor: Colors.white,
                 appBarTheme: const AppBarTheme(
                   systemOverlayStyle: SystemUiOverlayStyle(
@@ -80,6 +83,7 @@ class MyApp extends StatelessWidget{
               ),
               darkTheme: ThemeData(
                 primarySwatch: Colors.deepOrange,
+                primaryColor: HexColor('333739'),
                 scaffoldBackgroundColor: HexColor('333739'),
                 appBarTheme: AppBarTheme(
                   systemOverlayStyle: SystemUiOverlayStyle(
@@ -115,6 +119,10 @@ class MyApp extends StatelessWidget{
                     color: Colors.white,
                   ),
                 ),
+                hintColor: Colors.white,
+
+
+
               ),
               themeMode: cubit.isDark ? ThemeMode.dark : ThemeMode.light,
               debugShowCheckedModeBanner: false,

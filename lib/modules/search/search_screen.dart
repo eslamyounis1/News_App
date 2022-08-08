@@ -25,6 +25,7 @@ class SearchScreen extends StatelessWidget {
                   20.0,
                 ),
                 child: defaultFormField(
+                  context: context,
                     controller: searchController,
                     hintTxt: 'Search',
                     type: TextInputType.text,
@@ -38,6 +39,7 @@ class SearchScreen extends StatelessWidget {
                     onChange: (value) {
                       cubit.getSearch(value);
                     }),
+
               ),
               Expanded(
                 child: articleBuilder(cubit.search,isSearch: true),

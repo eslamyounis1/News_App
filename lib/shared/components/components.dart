@@ -28,7 +28,6 @@ Widget buildArticleItem(article, context) => InkWell(
                     fit: BoxFit.cover,
                   ),
                 ),
-
               ),
             ),
             const SizedBox(
@@ -103,6 +102,7 @@ Widget defaultFormField({
   IconData? suffIcon,
   IconData? preIcon,
   TextInputType? type,
+  required BuildContext context,
 }) {
   return TextFormField(
     controller: controller,
@@ -115,9 +115,19 @@ Widget defaultFormField({
         preIcon,
       ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(35.0),
+        borderSide: const BorderSide(width: 0.8),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(35.0),
+        borderSide: const BorderSide(
+          width: 2.0,
+          color: Colors.deepOrange,
+        ),
       ),
       hintText: hintTxt,
+      fillColor: Theme.of(context).primaryColor,
+      filled: true,
     ),
     validator: (value) {
       return validator(value);
