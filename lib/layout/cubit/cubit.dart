@@ -74,7 +74,6 @@ class NewsCubit extends Cubit<NewsStates> {
           'country': 'us',
           'category': 'business',
           'apiKey': apiKey,
-
         },
       ).then((value) {
         // print(value.data['articles'][0]['title']);
@@ -188,32 +187,37 @@ class NewsCubit extends Cubit<NewsStates> {
 
   // pull refresh function
   List<dynamic> refreshedList = [];
-  Future<void> pullRefresh() async{
+
+  Future<void> pullRefresh() async {
     // List<dynamic> refreshed
-    emit(NewsGetBusinessLoadingState());
+    return Future.delayed(
+      const Duration(seconds: 1),
+      (){
+        emit(NewsGetBusinessLoadingState());
 
-      DioHelper.getData(
-        methodUrl: 'v2/top-headlines',
-        query: {
-          'country': 'us',
-          'category': 'business',
-          'apiKey': apiKey,
-          'pageSize': 30,
+        DioHelper.getData(
+          methodUrl: 'v2/top-headlines',
+          query: {
+            'country': 'us',
+            'category': 'business',
+            'apiKey': apiKey,
+            'pageSize': 30,
+          },
+        ).then((value) {
+          // print(value.data['articles'][0]['title']);
+          business = value.data['articles'];
+          business = List.from(business.reversed);
+          print(business[0]['title']);
 
+          emit(NewsGetBusinessSuccessState());
+        }).catchError((error) {
+          print(error.toString());
 
-        },
-      ).then((value) {
-        // print(value.data['articles'][0]['title']);
-        business = value.data['articles'];
-        business = List.from(business.reversed);
-        print(business[0]['title']);
+          emit(NewsGetBusinessErrorState(error.toString()));
+        });
+        emit(NewsRefreshState());
+      } ,
+    );
 
-        emit(NewsGetBusinessSuccessState());
-      }).catchError((error) {
-        print(error.toString());
-
-        emit(NewsGetBusinessErrorState(error.toString()));
-      });
-    emit(NewsRefreshState());
   }
 }
