@@ -1,5 +1,8 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/layout/cubit/cubit.dart';
+import 'package:news_app/layout/cubit/states.dart';
 import 'package:news_app/modules/web_view/web_view_screen.dart';
 
 Widget buildArticleItem(article, context) => InkWell(
@@ -83,11 +86,21 @@ Widget myDivider() => Padding(
 
 Widget articleBuilder(list, {isSearch = false}) => ConditionalBuilder(
       condition: list.isNotEmpty,
-      builder: (context) => ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) => buildArticleItem(list[index], context),
-        separatorBuilder: (context, index) => myDivider(),
-        itemCount: list.length,
+      builder: (context) => BlocConsumer<NewsCubit,NewsStates>(
+        listener: (context,state){},
+        builder: (context,state){
+          var cubit = NewsCubit.get(context);
+          return RefreshIndicator(
+            onRefresh: cubit.pullRefresh,
+            child: ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) => buildArticleItem(list[index], context),
+              separatorBuilder: (context, index) => myDivider(),
+              itemCount: list.length,
+            ),
+          );
+        },
+
       ),
       fallback: (context) => isSearch
           ? Container()

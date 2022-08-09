@@ -71,9 +71,10 @@ class NewsCubit extends Cubit<NewsStates> {
       DioHelper.getData(
         methodUrl: 'v2/top-headlines',
         query: {
-          'country': 'eg',
+          'country': 'us',
           'category': 'business',
           'apiKey': apiKey,
+
         },
       ).then((value) {
         // print(value.data['articles'][0]['title']);
@@ -183,5 +184,36 @@ class NewsCubit extends Cubit<NewsStates> {
 
       emit(NewsGetSearchErrorState(error.toString()));
     });
+  }
+
+  // pull refresh function
+  List<dynamic> refreshedList = [];
+  Future<void> pullRefresh() async{
+    // List<dynamic> refreshed
+    emit(NewsGetBusinessLoadingState());
+
+      DioHelper.getData(
+        methodUrl: 'v2/top-headlines',
+        query: {
+          'country': 'us',
+          'category': 'business',
+          'apiKey': apiKey,
+          'pageSize': 30,
+
+
+        },
+      ).then((value) {
+        // print(value.data['articles'][0]['title']);
+        business = value.data['articles'];
+        business = List.from(business.reversed);
+        print(business[0]['title']);
+
+        emit(NewsGetBusinessSuccessState());
+      }).catchError((error) {
+        print(error.toString());
+
+        emit(NewsGetBusinessErrorState(error.toString()));
+      });
+    emit(NewsRefreshState());
   }
 }

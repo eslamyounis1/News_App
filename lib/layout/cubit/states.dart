@@ -41,5 +41,7 @@ class NewsGetSearchErrorState extends NewsStates{
   NewsGetSearchErrorState(this.error);
 }
 
+class NewsRefreshState extends NewsStates{}
+
 
 
