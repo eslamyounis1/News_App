@@ -99,7 +99,7 @@ class NewsCubit extends Cubit<NewsStates> {
       DioHelper.getData(
         methodUrl: 'v2/top-headlines',
         query: {
-          'country': 'eg',
+          'country': 'us',
           'category': 'science',
           'apiKey': apiKey,
         },
@@ -127,7 +127,7 @@ class NewsCubit extends Cubit<NewsStates> {
       DioHelper.getData(
         methodUrl: 'v2/top-headlines',
         query: {
-          'country': 'eg',
+          'country': 'us',
           'category': 'sports',
           'apiKey': apiKey,
         },
@@ -186,10 +186,7 @@ class NewsCubit extends Cubit<NewsStates> {
   }
 
   // pull refresh function
-  List<dynamic> refreshedList = [];
-
   Future<void> pullRefresh() async {
-    // List<dynamic> refreshed
     return Future.delayed(
       const Duration(seconds: 1),
       (){
@@ -214,6 +211,54 @@ class NewsCubit extends Cubit<NewsStates> {
           print(error.toString());
 
           emit(NewsGetBusinessErrorState(error.toString()));
+        });
+
+        //refresh science
+        emit(NewsGetScienceLoadingState());
+
+        DioHelper.getData(
+          methodUrl: 'v2/top-headlines',
+          query: {
+            'country': 'us',
+            'category': 'science',
+            'apiKey': apiKey,
+            'pageSize': 30,
+          },
+        ).then((value) {
+          // print(value.data['articles'][0]['title']);
+          science = value.data['articles'];
+          science = List.from(science.reversed);
+          print(science[0]['title']);
+
+          emit(NewsGetScienceSuccessState());
+        }).catchError((error) {
+          print(error.toString());
+
+          emit(NewsGetScienceErrorState(error.toString()));
+        });
+
+        // refresh sports
+        emit(NewsGetSportsLoadingState());
+
+        DioHelper.getData(
+          methodUrl: 'v2/top-headlines',
+          query: {
+            'country': 'us',
+            'category': 'sports',
+            'apiKey': apiKey,
+            'pageSize': 30,
+          },
+        ).then((value) {
+          // print(value.data['articles'][0]['title']);
+          sports = value.data['articles'];
+          sports = List.from(sports.reversed);
+          print(sports[0]['title']);
+
+          emit(NewsGetSportsSuccessState());
+        }).catchError((error) {
+          print(error.toString());
+
+          emit(NewsGetSportsErrorState(error.toString()));
         });
         emit(NewsRefreshState());
       } ,
