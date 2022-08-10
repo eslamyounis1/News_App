@@ -147,7 +147,7 @@ class NewsCubit extends Cubit<NewsStates> {
     }
   }
 
-  bool isDark = false;
+  bool isDark = true;
 
   void changeToDarkMode({fromShared}) {
     if (fromShared != null) {
@@ -186,7 +186,7 @@ class NewsCubit extends Cubit<NewsStates> {
   }
 
   // pull refresh function
-  Future<void> pullRefresh()async {
+  Future<void> businessPullRefresh()async {
     return Future.delayed(
       const Duration(seconds: 1),
       (){
@@ -212,7 +212,15 @@ class NewsCubit extends Cubit<NewsStates> {
 
           emit(NewsGetBusinessErrorState(error.toString()));
         });
+        emit(NewsBusinessRefreshState());
+      } ,
+    );
 
+  }
+  Future<void> sciencePullRefresh()async {
+    return Future.delayed(
+      const Duration(seconds: 1),
+      (){
         //refresh science
         emit(NewsGetScienceLoadingState());
 
@@ -237,6 +245,15 @@ class NewsCubit extends Cubit<NewsStates> {
           emit(NewsGetScienceErrorState(error.toString()));
         });
 
+        emit(NewsScienceRefreshState());
+      } ,
+    );
+
+  }
+  Future<void> sportsPullRefresh()async {
+    return Future.delayed(
+      const Duration(seconds: 1),
+          (){
         // refresh sports
         emit(NewsGetSportsLoadingState());
 
@@ -260,7 +277,7 @@ class NewsCubit extends Cubit<NewsStates> {
 
           emit(NewsGetSportsErrorState(error.toString()));
         });
-        emit(NewsRefreshState());
+        emit(NewsSportsRefreshState());
       } ,
     );
 

@@ -84,14 +84,58 @@ Widget myDivider() => Padding(
       ),
     );
 
-Widget articleBuilder(list, {isSearch = false}) => ConditionalBuilder(
+Widget businessArticleBuilder(list, {isSearch = false}) => ConditionalBuilder(
       condition: list.isNotEmpty,
       builder: (context) => BlocConsumer<NewsCubit, NewsStates>(
         listener: (context, state) {},
         builder: (context, state) {
           var cubit = NewsCubit.get(context);
           return RefreshIndicator(
-            onRefresh: cubit.pullRefresh,
+            onRefresh: cubit.businessPullRefresh,
+            child: ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) =>
+                  buildArticleItem(list[index], context),
+              separatorBuilder: (context, index) => myDivider(),
+              itemCount: list.length,
+            ),
+          );
+        },
+      ),
+      fallback: (context) => isSearch
+          ? Container()
+          : const Center(child: CircularProgressIndicator()),
+    );
+Widget scienceArticleBuilder(list, {isSearch = false}) => ConditionalBuilder(
+      condition: list.isNotEmpty,
+      builder: (context) => BlocConsumer<NewsCubit, NewsStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var cubit = NewsCubit.get(context);
+          return RefreshIndicator(
+            onRefresh: cubit.sciencePullRefresh,
+            child: ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) =>
+                  buildArticleItem(list[index], context),
+              separatorBuilder: (context, index) => myDivider(),
+              itemCount: list.length,
+            ),
+          );
+        },
+      ),
+      fallback: (context) => isSearch
+          ? Container()
+          : const Center(child: CircularProgressIndicator()),
+    );
+Widget sportsArticleBuilder(list, {isSearch = false}) => ConditionalBuilder(
+      condition: list.isNotEmpty,
+      builder: (context) => BlocConsumer<NewsCubit, NewsStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var cubit = NewsCubit.get(context);
+          return RefreshIndicator(
+            onRefresh: cubit.sportsPullRefresh,
             child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) =>

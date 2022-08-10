@@ -41,7 +41,7 @@ class NewsGetSearchErrorState extends NewsStates{
   NewsGetSearchErrorState(this.error);
 }
 
-class NewsRefreshState extends NewsStates{}
+class NewsBusinessRefreshState extends NewsStates{}
 
 class NewsScienceRefreshState extends NewsStates{}
 class NewsSportsRefreshState extends NewsStates{}
