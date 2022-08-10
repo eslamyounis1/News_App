@@ -86,21 +86,21 @@ Widget myDivider() => Padding(
 
 Widget articleBuilder(list, {isSearch = false}) => ConditionalBuilder(
       condition: list.isNotEmpty,
-      builder: (context) => BlocConsumer<NewsCubit,NewsStates>(
-        listener: (context,state){},
-        builder: (context,state){
+      builder: (context) => BlocConsumer<NewsCubit, NewsStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
           var cubit = NewsCubit.get(context);
           return RefreshIndicator(
             onRefresh: cubit.pullRefresh,
             child: ListView.separated(
               physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) => buildArticleItem(list[index], context),
+              itemBuilder: (context, index) =>
+                  buildArticleItem(list[index], context),
               separatorBuilder: (context, index) => myDivider(),
               itemCount: list.length,
             ),
           );
         },
-
       ),
       fallback: (context) => isSearch
           ? Container()
@@ -110,7 +110,7 @@ Widget articleBuilder(list, {isSearch = false}) => ConditionalBuilder(
 Widget defaultFormField({
   required TextEditingController controller,
   required String hintTxt,
-  required Function validator,
+   Function? validator,
   required Function onChange,
   IconData? suffIcon,
   IconData? preIcon,
@@ -121,12 +121,14 @@ Widget defaultFormField({
     controller: controller,
     keyboardType: type,
     decoration: InputDecoration(
-      suffix: Icon(
+      suffixIcon: Icon(
         suffIcon,
       ),
       prefixIcon: Icon(
         preIcon,
+        color: Theme.of(context).hintColor,
       ),
+      focusColor: Colors.deepOrange,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(35.0),
         borderSide: const BorderSide(width: 0.8),
@@ -139,15 +141,22 @@ Widget defaultFormField({
         ),
       ),
       hintText: hintTxt,
+      hintStyle: TextStyle(
+        color: Theme.of(context).hintColor,
+      ),
       fillColor: Theme.of(context).primaryColor,
       filled: true,
+
     ),
     validator: (value) {
-      return validator(value);
+      return validator!(value);
     },
     onChanged: (value) {
       onChange(value);
     },
+    style: TextStyle(
+      color: Theme.of(context).hintColor,
+    ),
   );
 }
 

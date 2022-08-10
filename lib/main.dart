@@ -120,9 +120,6 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
                 hintColor: Colors.white,
-
-
-
               ),
               themeMode: cubit.isDark ? ThemeMode.dark : ThemeMode.light,
               debugShowCheckedModeBanner: false,

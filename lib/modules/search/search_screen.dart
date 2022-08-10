@@ -26,23 +26,24 @@ class SearchScreen extends StatelessWidget {
                 ),
                 child: defaultFormField(
                   context: context,
-                    controller: searchController,
-                    hintTxt: 'Search',
-                    type: TextInputType.text,
-                    preIcon: Icons.search,
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'search must not be empty';
-                      }
-                      return null;
-                    },
-                    onChange: (value) {
-                      cubit.getSearch(value);
-                    }),
+                  controller: searchController,
+                  hintTxt: 'Search',
+                  type: TextInputType.text,
+                  preIcon: Icons.search,
+                  // validator: (String value) {
+                  //   if (value.isEmpty) {
+                  //     return 'search must not be empty';
+                  //   }
+                  //   return null;
+                  // },
+                  onChange: (value) {
+                    cubit.getSearch(value);
+                  },
+                ),
 
               ),
               Expanded(
-                child: articleBuilder(cubit.search,isSearch: true),
+                child: articleBuilder(cubit.search, isSearch: true),
               ),
             ],
           ),

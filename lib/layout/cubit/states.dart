@@ -43,5 +43,8 @@ class NewsGetSearchErrorState extends NewsStates{
 
 class NewsRefreshState extends NewsStates{}
 
+class NewsScienceRefreshState extends NewsStates{}
+class NewsSportsRefreshState extends NewsStates{}
+
 
 

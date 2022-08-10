@@ -186,7 +186,7 @@ class NewsCubit extends Cubit<NewsStates> {
   }
 
   // pull refresh function
-  Future<void> pullRefresh() async {
+  Future<void> pullRefresh()async {
     return Future.delayed(
       const Duration(seconds: 1),
       (){
@@ -265,4 +265,6 @@ class NewsCubit extends Cubit<NewsStates> {
     );
 
   }
+
+
 }
